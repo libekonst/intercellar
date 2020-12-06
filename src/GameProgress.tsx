@@ -20,7 +20,7 @@ export function GameProgress({ progress }: Props) {
   });
 
   return (
-    <div style={{ margin: 20, textAlign: 'center' }}>
+    <div style={{ margin: 20, textAlign: "center" }}>
       <ProgressIndicator
         percentComplete={progress}
         description={
@@ -29,11 +29,8 @@ export function GameProgress({ progress }: Props) {
             horizontal
             horizontalAlign="end"
           >
-            <div style={{ fontWeight: "bold" }}>
-              {Strings.PROGRESS_LABEL}
-            </div>
+            <div style={{ fontWeight: "bold" }}>{Strings.PROGRESS_LABEL}</div>
             <animated.div>{percentageString}</animated.div>
-            <AddingCustomers />
           </Stack>
         }
       />
@@ -41,11 +38,3 @@ export function GameProgress({ progress }: Props) {
   );
 }
 
-enum AddingCustomersStatus {
-  NOTHING,
-  STARTED_COUNTING,
-}
-
-function AddingCustomers() {
-  return <div style={{ width: 10, height: 10, backgroundColor: "red" }}></div>;
-}

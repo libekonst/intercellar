@@ -4,6 +4,7 @@ export type Serving = { serving: ServingTypes; id: string };
 export enum ServingTypes {
   LAGER,
   RED_ALE,
+  CIDER,
   DOUBLE_BEER,
 }
 
@@ -16,6 +17,8 @@ export const mapServingToEmoji = (serving: ServingTypes) => {
       return "🍷";
     case ServingTypes.DOUBLE_BEER:
       return "🍻";
+    case ServingTypes.CIDER:
+      return "🍎";
   }
 };
 

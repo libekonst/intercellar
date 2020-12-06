@@ -1,6 +1,6 @@
 export enum Strings {
-  POUR_BEER_TITLE_TEACH_BUBBLE = "Pull the handle",
-  POUR_BEER_MESSAGE_TEACH_BUBBLE = "Pour a perfect pint and make a customer happy. Serve all the customers to win!",
+  BEER_TAP_TEACH_BUBBLE_TITLE = "Pull the handle",
+  BEER_TAP_TEACH_BUBBLE_MESSAGE = "Pour a pint and make a customer happy. More people may occasionally visit the taproom, serve everyone a pint to win!",
   RED_ALE_SERVING = "Red Ale",
   LAGER_SERVING = "Lager",
   PROGRESS_LABEL = "Happy drinkers",

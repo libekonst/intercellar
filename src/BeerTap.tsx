@@ -4,7 +4,7 @@ import { Strings } from "./strings";
 import { getScreenCenterPosition } from "./utils";
 
 type Props = { onClick?: () => void; startedServing?: boolean };
-export function TapLever({ onClick, startedServing }: Props) {
+export function BeerTap({ onClick, startedServing }: Props) {
   const [bubbleVisible, setBubbleVisible] = useState(false);
 
   const closeBubble = () => setBubbleVisible(false);
@@ -13,7 +13,7 @@ export function TapLever({ onClick, startedServing }: Props) {
   useEffect(() => {
     if (startedServing) return;
 
-    const timeoutId = setTimeout(openBubble, 2000);
+    const timeoutId = setTimeout(openBubble, 1000);
     return () => clearTimeout(timeoutId);
   }, [startedServing]);
 
@@ -31,14 +31,14 @@ export function TapLever({ onClick, startedServing }: Props) {
 
       {bubbleVisible && (
         <TeachingBubble
-          headline={Strings.POUR_BEER_TITLE_TEACH_BUBBLE}
+          headline={Strings.BEER_TAP_TEACH_BUBBLE_TITLE}
           target="#primary-cta"
           hasCloseButton
           onDismiss={closeBubble}
           isClickableOutsideFocusTrap
           forceFocusInsideTrap={false}
         >
-          {Strings.POUR_BEER_MESSAGE_TEACH_BUBBLE}
+          {Strings.BEER_TAP_TEACH_BUBBLE_MESSAGE}
         </TeachingBubble>
       )}
     </div>

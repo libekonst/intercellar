@@ -5,6 +5,7 @@ import { ServingTypes } from "./Serving";
 export const selectServings = (state: State) => state.servings;
 export const selectServingPreference = (state: State) => state.preferredServing;
 export const selectStartedServing = (state: State) => selectServings(state) > 0;
+export const selectGameRunning = (state: State) => selectStartedServing(state);
 export const selectNormalizedServedCustomersRatio = (state: State) =>
   state.servings / state.customers;
 export const selectServedCustomersPercentage = (state: State) =>
@@ -75,5 +76,5 @@ export const initialState = {
   servings: 0,
   preferredServing: ServingTypes.LAGER,
   customers: 18,
-  difficulty: Difficulty.NORMAL,
+  difficulty: Difficulty.EASY,
 };
