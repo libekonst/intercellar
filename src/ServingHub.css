@@ -1,0 +1,8 @@
+.serving-item::selection {
+  color: none;
+  background: none;
+}
+.serving-item {
+  font-size: 40px;
+  pointer-events: none;
+}

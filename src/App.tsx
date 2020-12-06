@@ -1,25 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useReducer } from "react";
+import "./App.css";
+import {
+  initializeIcons,
+} from "office-ui-fabric-react";
+import { ServingsHub } from "./ServingsHub";
+import { GameProgress } from "./GameProgress";
+import {
+  reducer,
+  selectServings,
+  addServing,
+  initialState,
+  selectProgress,
+  selectStartedServing,
+  selectServingPreference,
+} from "./state";
+import { Scaffold } from "./Scaffold";
+import { TapLever } from "./TapLever";
+
+initializeIcons();
 
 function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Scaffold
+      header={<GameProgress progress={selectProgress(state)} />}
+      body={
+        <>
+          <ServingsHub
+            totalServings={selectServings(state)}
+            preference={selectServingPreference(state)}
+          />
+          {/* <
+              <DefaultButton onClick={() => dispatch(addCustomers(5))}>
+                Increase capacity
+              </DefaultButton>
+              */}
+          <TapLever
+            startedServing={selectStartedServing(state)}
+            onClick={() => dispatch(addServing())}
+          />
+        </>
+      }
+    />
   );
 }
 
