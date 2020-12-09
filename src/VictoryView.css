@@ -56,6 +56,13 @@
   font-size: 5rem;
   margin-bottom: 2rem;
   text-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+
+  background: #fdf2d4; /* fallback for old browsers */
+  background: linear-gradient(to top, #fdf2d4, #fff8e5);
+
+  box-decoration-break: clone;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 @media only screen and (max-width: 600px) {
