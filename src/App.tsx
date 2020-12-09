@@ -9,16 +9,20 @@ import {
   addServing,
   initialState,
   selectProgress,
-  selectStartedServing,
   selectServingPreference,
   selectDifficultySetting,
   addCustomers,
-  selectGameRunning,
+  isGameRunning,
+  isGameWon,
+  restart,
+  playAgain,
+  showTeachingBubble,
 } from "./state";
 import { Scaffold } from "./Scaffold";
 import { BeerTap } from "./BeerTap";
 import { CustomersHub } from "./CustomersHub";
 import { Stack } from "@fluentui/react";
+import { VictoryView } from "./VictoryView";
 
 initializeIcons();
 
@@ -28,6 +32,7 @@ function App() {
   const addMoreCustomers = useCallback((customers: number) => {
     dispatch(addCustomers(customers));
   }, []);
+
   return (
     <Scaffold
       header={
@@ -36,8 +41,9 @@ function App() {
           <CustomersHub
             difficulty={selectDifficultySetting(state)}
             onAddCustomers={addMoreCustomers}
-            gameRunning={selectGameRunning(state)}
+            gameRunning={isGameRunning(state)}
           />
+          <button onClick={() => dispatch(restart())}>reset</button>
         </Stack>
       }
       body={
@@ -53,9 +59,12 @@ function App() {
               */}
 
           <BeerTap
-            startedServing={selectStartedServing(state)}
+            showBubble={showTeachingBubble(state)}
             onClick={() => dispatch(addServing())}
           />
+          {isGameWon(state) && (
+            <VictoryView onPlayAgain={() => dispatch(playAgain())} />
+          )}
         </>
       }
     />

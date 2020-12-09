@@ -2,7 +2,18 @@
   color: none;
   background: none;
 }
-.serving-item {
-  font-size: 40px;
-  pointer-events: none;
+
+@media only screen and (max-width: 600px) {
+  .serving-item {
+    font-size: 20px;
+    pointer-events: none;
+    touch-action: none;
+  }
+}
+@media only screen and (min-width: 600px) {
+  .serving-item {
+    font-size: 40px;
+    pointer-events: none;
+    touch-action: none;
+  }
 }

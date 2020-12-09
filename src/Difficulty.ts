@@ -9,13 +9,13 @@ export enum Difficulty {
 
 type Timer = {
   interval: () => number;
-  customers: () => number;
+  damage: () => number;
 };
 
 /** Small amount of customers, larger intervals. */
 const easy = (): Timer => ({
   interval: () => getRandomInt(2, 4) * 1000,
-  customers: () => getRandomInt(1, 2),
+  damage: () => getRandomInt(1, 2),
 });
 
 /**
@@ -23,8 +23,8 @@ const easy = (): Timer => ({
  * Impactful damage but gives time to react. Smooth animation.
  */
 const normal = (): Timer => ({
-  interval: () => getRandomInt(2, 3) * 1000,
-  customers: () => getRandomInt(5, 9),
+  interval: () => getRandomInt(1, 3) * 750,
+  damage: () => getRandomInt(5, 9),
 });
 
 /**
@@ -33,8 +33,8 @@ const normal = (): Timer => ({
  * Might hurt animation.
  */
 const hard = (): Timer => ({
-  interval: () => getRandomInt(1, 4) * 250,
-  customers: () => getRandomInt(1, 7),
+  interval: () => getRandomInt(1, 3) * 250,
+  damage: () => getRandomInt(1, 7),
 });
 
 /**

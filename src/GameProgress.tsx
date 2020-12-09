@@ -1,6 +1,6 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { ProgressIndicator, Stack } from "@fluentui/react";
-import { animated, config, useSpring } from "react-spring";
+import { animated, useSpring } from "react-spring";
 import { Strings } from "./strings";
 
 type Props = {
@@ -23,6 +23,7 @@ export function GameProgress({ progress }: Props) {
     <div style={{ margin: 20, textAlign: "center" }}>
       <ProgressIndicator
         percentComplete={progress}
+        styles={{ progressBar: { color: "pink" } }}
         description={
           <Stack
             tokens={{ childrenGap: "0.7rem" }}
@@ -37,4 +38,3 @@ export function GameProgress({ progress }: Props) {
     </div>
   );
 }
-

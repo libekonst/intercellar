@@ -4,4 +4,6 @@ export enum Strings {
   RED_ALE_SERVING = "Red Ale",
   LAGER_SERVING = "Lager",
   PROGRESS_LABEL = "Happy drinkers",
+  VICTORY_LABEL = "VICTORY",
+  PLAY_AGAIN_BTN = "PLAY AGAIN",
 }

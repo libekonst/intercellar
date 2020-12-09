@@ -4,16 +4,25 @@ import { ServingTypes } from "./Serving";
 // -- selectors
 export const selectServings = (state: State) => state.servings;
 export const selectServingPreference = (state: State) => state.preferredServing;
-export const selectStartedServing = (state: State) => selectServings(state) > 0;
-export const selectGameRunning = (state: State) => selectStartedServing(state);
+export const selectCustomers = (state: State) => state.customers;
+export const selectDifficultySetting = (state: State) => state.difficulty;
+export const selectTimesRestarted = (state: State) => state.timesRestarted;
+
 export const selectNormalizedServedCustomersRatio = (state: State) =>
-  state.servings / state.customers;
+  selectServings(state) / selectCustomers(state);
 export const selectServedCustomersPercentage = (state: State) =>
   Math.ceil(selectNormalizedServedCustomersRatio(state) * 100);
-export const selectDifficultySetting = (state: State) => state.difficulty;
-export const selectCustomers = (state: State) => state.customers;
 export const selectProgress = (state: State) =>
   selectServings(state) / selectCustomers(state); // 0 to 1
+
+export const startedServing = (state: State) => selectServings(state) > 0;
+export const isGameWon = (state: State) =>
+  selectServings(state) === selectCustomers(state);
+export const isGameRunning = (state: State) =>
+  startedServing(state) && !isGameWon(state);
+export const isFirstOpen = (state: State) => selectTimesRestarted(state) === 0;
+export const showTeachingBubble = (state: State) =>
+  isFirstOpen(state) && !startedServing(state);
 
 // -- actions
 type Actions = ReturnType<
@@ -22,6 +31,8 @@ type Actions = ReturnType<
   | typeof toggleDifficultyPress
   | typeof difficultySelected
   | typeof addCustomers
+  | typeof restart
+  | typeof playAgain
 >;
 export const addServing = () => <const>{ type: "ADD_SERVING" };
 
@@ -40,7 +51,8 @@ export const difficultySelected = (difficulty: Difficulty) =>
 export const addCustomers = (amount: number) =>
   <const>{ type: "ADD_CUSTOMERS", payload: { amount } };
 
-export const MAX_KEGS = 74;
+export const restart = () => <const>{ type: "RESTART" };
+export const playAgain = () => <const>{ type: "PLAY_AGAIN" };
 
 // -- reducer
 type Reducer = (state: State, action: Actions) => State;
@@ -66,6 +78,14 @@ export const reducer: Reducer = (state, action) => {
     case "ADD_CUSTOMERS":
       return { ...state, customers: state.customers + action.payload.amount };
 
+    case "PLAY_AGAIN":
+    case "RESTART":
+      return {
+        ...initialState,
+        difficulty: state.difficulty,
+        timesRestarted: state.timesRestarted + 1,
+      };
+
     default:
       return state;
   }
@@ -77,4 +97,5 @@ export const initialState = {
   preferredServing: ServingTypes.LAGER,
   customers: 18,
   difficulty: Difficulty.EASY,
+  timesRestarted: 0,
 };

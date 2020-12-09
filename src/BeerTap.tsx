@@ -3,19 +3,22 @@ import React, { useEffect, useState } from "react";
 import { Strings } from "./strings";
 import { getScreenCenterPosition } from "./utils";
 
-type Props = { onClick?: () => void; startedServing?: boolean };
-export function BeerTap({ onClick, startedServing }: Props) {
+type Props = {
+  onClick?: () => void;
+  showBubble?: boolean;
+};
+export function BeerTap({ onClick, showBubble }: Props) {
   const [bubbleVisible, setBubbleVisible] = useState(false);
 
   const closeBubble = () => setBubbleVisible(false);
   const openBubble = () => setBubbleVisible(true);
 
   useEffect(() => {
-    if (startedServing) return;
+    if (!showBubble) return;
 
     const timeoutId = setTimeout(openBubble, 1000);
     return () => clearTimeout(timeoutId);
-  }, [startedServing]);
+  }, [showBubble]);
 
   return (
     <div style={{ position: "absolute", ...getScreenCenterPosition() }}>
