@@ -1,4 +1,4 @@
-import { nanoid } from "nanoid";
+import { nanoid } from 'nanoid';
 
 export const id = () => nanoid(10);
 
@@ -11,12 +11,10 @@ export const getRandomPosition = () => {
   return { top: randomX, left: randomY };
 };
 
-export const getScreenCenterPosition = () => {
-  return {
-    top: window.innerHeight / 2,
-    left: window.innerWidth / 2,
-  };
-};
+export const getScreenCenterPosition = () => ({
+  top: window.innerHeight / 2,
+  left: window.innerWidth / 2
+});
 
 /**
  * Returns a random integer between min (inclusive) and max (inclusive).

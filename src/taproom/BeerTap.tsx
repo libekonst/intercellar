@@ -1,7 +1,7 @@
-import { PrimaryButton, TeachingBubble } from "@fluentui/react";
-import React, { useEffect, useState } from "react";
-import { Strings } from "./strings";
-import { getScreenCenterPosition } from "./utils";
+import { PrimaryButton, TeachingBubble } from '@fluentui/react';
+import React, { useEffect, useState } from 'react';
+import { Strings } from '../resources/strings';
+import { getScreenCenterPosition } from '../utils/utils';
 
 type Props = {
   onClick?: () => void;
@@ -21,14 +21,13 @@ export function BeerTap({ onClick, showBubble }: Props) {
   }, [showBubble]);
 
   return (
-    <div style={{ position: "absolute", ...getScreenCenterPosition() }}>
+    <div style={{ position: 'absolute', ...getScreenCenterPosition() }}>
       <PrimaryButton
         id="primary-cta"
         onClick={() => {
           closeBubble();
           if (onClick) onClick();
-        }}
-      >
+        }}>
         🍺 Serve Beer
       </PrimaryButton>
 
@@ -39,8 +38,7 @@ export function BeerTap({ onClick, showBubble }: Props) {
           hasCloseButton
           onDismiss={closeBubble}
           isClickableOutsideFocusTrap
-          forceFocusInsideTrap={false}
-        >
+          forceFocusInsideTrap={false}>
           {Strings.BEER_TAP_TEACH_BUBBLE_MESSAGE}
         </TeachingBubble>
       )}

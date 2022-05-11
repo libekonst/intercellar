@@ -1,62 +1,62 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from 'react';
 import {
   useSpring,
   animated,
   config,
   useChain,
   useTransition,
-  useSprings,
-} from "react-spring";
-import { Strings } from "./strings";
+  useSprings
+} from 'react-spring';
+import { Strings } from '../resources/strings';
 import {
   getRandomInt,
   getRandomPosition,
   getScreenCenterPosition,
-  id,
-} from "./utils";
-import "./VictoryView.css";
+  id
+} from '../utils/utils';
+import './VictoryView.css';
 
 type Props = {
   onPlayAgain: () => void;
 };
 export function VictoryView({ onPlayAgain }: Props) {
   const [backdropProps] = useSpring(() => ({
-    from: { opacity: 0, transform: "scale(1)" },
-    to: { opacity: 1, transform: "scale(1)" },
+    from: { opacity: 0, transform: 'scale(1)' },
+    to: { opacity: 1, transform: 'scale(1)' }
   }));
 
   const buttonRef = useRef<any>();
   const [buttonProps] = useSpring(() => ({
-    from: { transform: "scale(0)" },
-    to: { transform: "scale(1)" },
-    ref: buttonRef,
+    from: { transform: 'scale(0)' },
+    to: { transform: 'scale(1)' },
+    ref: buttonRef
   }));
 
   const titleRef = useRef<any>();
   const [titleProps] = useSpring(() => ({
-    from: { transform: "translateY(100px) scale(0)" },
-    to: { transform: "translateY(0) scale(1)" },
+    from: { transform: 'translateY(100px) scale(0)' },
+    to: { transform: 'translateY(0) scale(1)' },
     config: config.stiff,
-    ref: titleRef,
+    ref: titleRef
   }));
 
   const confettiItems = useMemo(createConfetti, []);
   const confetti = useTransition(confettiItems, (item) => item.id, {
     from: () => ({
       opacity: 0,
-      transform: "scale(0) rotate(0turn)",
-      position: "absolute",
-      ...getScreenCenterPosition(),
+      transform: 'scale(0) rotate(0turn)',
+      position: 'absolute',
+      ...getScreenCenterPosition()
     }),
     // use fn to have a unique position for each element
     enter: () => ({
       opacity: 1,
       transform: `scale(1) rotate(${Math.random() * 2}turn)`,
-      ...getRandomPosition(),
+      ...getRandomPosition()
     }),
     // leave: { opacity: 0, transform: "scale(0.8)" },
     config: config.wobbly,
-    trail: 20,
+    trail: 20
   });
 
   useChain([titleRef, buttonRef]);
@@ -75,8 +75,7 @@ export function VictoryView({ onPlayAgain }: Props) {
         <animated.div
           style={buttonProps}
           className="victory-button"
-          onClick={onPlayAgain}
-        >
+          onClick={onPlayAgain}>
           {Strings.PLAY_AGAIN_BTN}
         </animated.div>
       </animated.div>
